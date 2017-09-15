@@ -28,13 +28,20 @@ if __name__ == "__main__":
             # BytesElementParser
             # DateTimeElementParser
             # MappedElementParser
+            ## bytes_to_float(value, _domain, _range)
 
     The base parser class provides the interfaces that enables the objects to
     be manipualted as bytes, strings or numerics.
 
     This is all rather abstract, how about some examples?
 
+    ! Likely a problem in MISB 0601 Tag #15 Sensor True Altitude. Got
+    -5709.5108 but expected 14190.7.expected. Odd though, Tag 25 "Frame Center
+    Elevation" appears to have same values and calculations. Is there perhaps
+    an error in the document?
+
     """
+
 
 def do_some_exercises():
     with open('./data/DynamicConstantMISMMSPacketData.bin', 'rb') as f:
@@ -61,6 +68,7 @@ def do_some_exercises():
 
     # What about displaying all the tags names and values?
     print_all(packet, element_full)
+
 
 def print_all(outer_set, func, level=1, indent='    '):
     out = []
@@ -100,7 +108,6 @@ def element_full(item):
         value = item.value
 
     return '{:<28} {}'.format(name, value)
-
 
 
 if __name__ == '__main__':
