@@ -62,29 +62,33 @@ def do_some_exercises():
     # What about displaying all the tags names and values?
     print_all(packet, element_full)
 
-def print_all(outer_set, func):
+def print_all(outer_set, func, level=1, indent='    '):
     out = []
-    indent = ' ' * 4
 
     def get_each_item_of(a_set, level=0):
         for item in a_set:
             out.append(level * indent + str(func(item)))
 
             if hasattr(item, 'items'):
-                get_each_item_of(item.items.values(), level=level+1)
+                next_level = level + 1
+                get_each_item_of(item.items.values(), next_level)
 
-    get_each_item_of([outer_set,])
+    get_each_item_of([outer_set, ], level)
 
     print('\n'.join([item for item in out]))
+
 
 def element_types(item):
     return type(item)
 
+
 def element_names(item):
     return item.name
 
+
 def element_value(item):
     return item.value
+
 
 def element_full(item):
     name = item.name
