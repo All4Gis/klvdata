@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import klvdata
+import klvdata.common
 
 if __name__ == "__main__":
     """ Returns single MISB0601 UAS Local Metadata Set Packet
@@ -99,15 +100,22 @@ def element_value(item):
 
 
 def element_full(item):
-    name = item.name
+    if len(item) > 1:
+        key = klvdata.common.bytes_to_hexstr(item.key)
+    else:
+        key = klvdata.common.bytes_to_int(item.key)
+
+    name = '{} ({}):'.format(item.name, key)
 
     if hasattr(item, 'items'):
         # value = ' ' * 4 + '---'
         value = '-' * 30
+    elif hasattr(item.value, 'units'):
+        value = '{} {}'.format(item.value, item.value.units)
     else:
-        value = item.value
+        value = '{}'.format(item.value)
 
-    return '{:<28} {}'.format(name, value)
+    return '{:<35} {}'.format(name, value)
 
 
 if __name__ == '__main__':

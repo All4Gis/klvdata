@@ -124,7 +124,7 @@ class StringValue(BaseValue):
 
 class MappedElementParser(ElementParser, metaclass=ABCMeta):
     def __init__(self, value):
-        super().__init__(MappedValue(value, self._domain, self._range))
+        super().__init__(MappedValue(value, self._domain, self._range, self.units))
 
     @property
     @classmethod
@@ -139,10 +139,13 @@ class MappedElementParser(ElementParser, metaclass=ABCMeta):
         pass
 
 class MappedValue(BaseValue):
-    def __init__(self, value, _domain, _range):
+    def __init__(self, value, _domain, _range, units=''):
+        # Why is super.__init__ not called?
         self._domain = _domain
         self._range = _range
         self.value = bytes_to_float(value, self._domain, self._range)
+        self.units = units
+
 
     def __bytes__(self):
         return float_to_bytes(self.value, self._domain, self._range)
@@ -152,7 +155,3 @@ class MappedValue(BaseValue):
 
     def __float__(self):
         return self.value
-
-
-
-

@@ -32,7 +32,9 @@ from klvdata.klvparser import KLVParser
 
 
 class SetParser(Element, metaclass=ABCMeta):
-    """Parsable Element. Not intended to be used directly. Always as super class."""
+    """Parsable Element. Not intended to be used directly. Always as super
+    class.
+    """
     _unknown_element = UnknownElement
 
     def __init__(self, value, key_length=1):
@@ -46,15 +48,17 @@ class SetParser(Element, metaclass=ABCMeta):
         """Return element provided bytes key.
 
         For consistency of this collection of modules, __getitem__ does not
-        attempt to add convenience of being able to index by the int equivalent.
-        Instead, the user should pass keys with method bytes.
-        """
+        attempt to add convenience of being able to index by the int
+        equivalent. Instead, the user should pass keys with method bytes. """
+
         return self.items[bytes(key)]
 
     def parse(self):
-        """Parse the parent into items. Called on init and modification of parent value.
+        """Parse the parent into items. Called on init and modification of
+        parent value.
 
-        If a known parser is not available for key, parse as generic KLV element.
+        If a known parser is not available for key, parse as generic KLV
+        element.
         """
         for key, value in KLVParser(self.value, self.key_length):
             try:
@@ -64,16 +68,18 @@ class SetParser(Element, metaclass=ABCMeta):
 
     @classmethod
     def add_parser(cls, obj):
-        """Decorator method used to register a parser to the class parsing repertoire.
+        """Decorator method used to register a parser to the class parsing
+        repertoire.
 
-        obj is required to implement key attribute supporting bytes as returned by KLVParser key.
+        obj is required to implement key attribute supporting bytes as returned
+        by KLVParser key.
         """
 
-        # If sublcass of ElementParser does not implement key, dict accepts key of
-        # type property object. bytes(obj.key) will raise TypeError. ElementParser
-        # requires key as abstract property but no raise until instantiation which
-        # does not occur because the value is never recalled and instantiated from
-        # parsers.
+        # If sublcass of ElementParser does not implement key, dict accepts key
+        # of type property object. bytes(obj.key) will raise TypeError.
+        # ElementParser requires key as abstract property but no raise until
+        # instantiation which does not occur because the value is never
+        # recalled and instantiated from parsers.
         cls.parsers[bytes(obj.key)] = obj
 
         return obj
@@ -105,7 +111,7 @@ class SetParser(Element, metaclass=ABCMeta):
             for item in items:
                 print(indent * "\t" + str(type(item)))
                 if hasattr(item, 'items'):
-                    repeat(item.items.values(), indent+1)
+                    repeat(item.items.values(), indent + 1)
 
         repeat(self.items.values())
 
@@ -114,7 +120,8 @@ def str_dict(values):
     out = []
 
     def per_item(value, indent=0):
-        for item in value:
+        # import pdb; pdb.set_trace()
+        for item in value.values():
             if isinstance(item, self):
                 out.append(indent * "\t" + str(item))
             else:

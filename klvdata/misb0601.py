@@ -93,6 +93,7 @@ class PlatformHeadingAngle(MappedElementParser):
     key = b'\x05'
     _domain = (0, 2**16-1)
     _range = (0, 360)
+    units = 'degrees'
 
 
 @UASLocalMetadataSet.add_parser
@@ -100,6 +101,7 @@ class PlatformPitchAngle(MappedElementParser):
     key = b'\x06'
     _domain = (-(2**15-1), 2**15-1)
     _range = (-20, 20)
+    units = 'degrees'
 
 
 @UASLocalMetadataSet.add_parser
