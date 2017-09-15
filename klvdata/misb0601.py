@@ -159,85 +159,105 @@ class SensorLongitude(MappedElementParser):
     _range = (-180, 180)
     units = 'degrees'
 
-#
-# @ST0601.add_parser
-# class SensorTrueAltitude(MappedElementParser):
-#     key = b'\x0F'
-#     _domain = (0, 2**8-1)
-#     _range = (-900, +19e3)
-#     units = 'meters'
+
+@UASLocalMetadataSet.add_parser
+class SensorTrueAltitude(MappedElementParser):
+    """MISB 0601 Tag 15: Sensor True Altitue Conversion."""
+    key = b'\x0F'
+    _domain = (0, 2**16)
+    _range = (-900, +19e3)
+    units = 'meters'
 
 
-# @ST0601.add_parser
-# class SensorHorizontalFieldOfView(MappedElementParser):
-#     tag, name = 16, "Sensor Horizontal Field of View"
-#     min_value, max_value, units = 0, +180, 'degrees'
-#     min_length, max_length, signed = 2, 2, False
-#
-#
-# @ST0601.add_parser
-# class SensorVerticalFieldOfView(MappedElementParser):
-#     tag, name = 17, "Sensor Vertical Field of View"
-#     min_value, max_value, units = 0, +180, 'degrees'
-#     min_length, max_length, signed = 2, 2, False
-#
-#
-# @ST0601.add_parser
-# class SensorRelativeAzimuthAngle(MappedElementParser):
-#     tag, name = 18, "Sensor Relative Azimuth Angle"
-#     min_value, max_value, units = 0, +360, 'degrees'
-#     min_length, max_length, signed = 4, 4, False
-#
-#
-# @ST0601.add_parser
-# class SensorRelativeElevationAngle(MappedElementParser):
-#     tag, name = 19, "Sensor Relative Elevation Angle"
-#     min_value, max_value, units = -180, +180, 'degrees'
-#     min_length, max_length, signed = 4, 4, True
-#
-#
-# @ST0601.add_parser
-# class SensorRelativeRollAngle(MappedElementParser):
-#     tag, name = 20, "Sensor Relative Roll Angle"
-#     min_value, max_value, units = 0, +360, 'degrees'
-#     min_length, max_length, signed = 4, 4, False
-#
-#
-# @ST0601.add_parser
-# class SlantRange(MappedElementParser):
-#     tag, name = 21, "Slant Range"
-#     min_value, max_value, units = 0, +5e6, 'meters'
-#     min_length, max_length, signed = 4, 4, False
-#
-#
-# @ST0601.add_parser
-# class TargetWidth(MappedElementParser):
-#     tag, name = 22, "Target Width"
-#     min_value, max_value, units = 0, +10e3, 'meters'
-#     min_length, max_length, signed = 2, 2, False
-#
-#
-# @ST0601.add_parser
-# class FrameCenterLatitude(MappedElementParser):
-#     tag, name = 23, "Frame Center Latitude"
-#     min_value, max_value, units = -90, +90, 'degrees'
-#     min_length, max_length, signed = 4, 4, True
-#
-#
-# @ST0601.add_parser
-# class FrameCenterLongitude(MappedElementParser):
-#     tag, name = 24, "Frame Center Longitude"
-#     min_value, max_value, units = -180, +180, 'degrees'
-#     min_length, max_length, signed = 4, 4, True
-#
-#
-# @ST0601.add_parser
-# class FrameCenterElevation(MappedElementParser):
-#     tag, name = 25, "Frame Center Elevation"
-#     min_value, max_value, units = -900, +19e3, "meters"
-#     min_length, max_length, signed = 2, 2, False
-#
-#
+@UASLocalMetadataSet.add_parser
+class SensorHorizontalFieldOfView(MappedElementParser):
+    """MISB 0601 Tag 16: Sensor Horizontal Field of View Conversion."""
+    key = b'\x10'
+    _domain = (0, 2**16-1)
+    _range = (0, 180)
+    units = 'degrees'
+
+
+@UASLocalMetadataSet.add_parser
+class SensorVerticalFieldOfView(MappedElementParser):
+    """MISB 0601 Tag 17: Sensor Vertical Field of View Conversion."""
+    key = b'\x11'
+    _domain = (0, 2**16-1)
+    _range = (0, 180)
+    units = 'degrees'
+
+
+@UASLocalMetadataSet.add_parser
+class SensorRelativeAzimuthAngle(MappedElementParser):
+    """MISB 0601 Tag 18: Sensor Relative Azimuth Ange Conversion."""
+    key = b'\x12'
+    _domain = (0, 2**32-1)
+    _range = (0, 360)
+    units = 'degrees'
+
+
+@UASLocalMetadataSet.add_parser
+class SensorRelativeElevationAngle(MappedElementParser):
+    """MISB 0601 Tag 19: Sensor Relative Elevation Angle Conversion."""
+    key = b'\x13'
+    _domain = (-(2**31-1), 2**31-1)
+    _range = (-180, 180)
+    units = 'degrees'
+
+
+@UASLocalMetadataSet.add_parser
+class SensorRelativeRollAngle(MappedElementParser):
+    """MISB 0601 Tag 20: Sensor Relative Roll Angle Conversion."""
+    key = b'\x14'
+    _domain = (0, 2**32-1)
+    _range = (0, 360)
+    units = 'degrees'
+
+
+@UASLocalMetadataSet.add_parser
+class SlantRange(MappedElementParser):
+    """MISB 0601 Tag 21: Slant Range Conversion."""
+    key = b'\x15'
+    _domain = (0, 2**32-1)
+    _range = (0, +5e6)
+    units = 'meters'
+
+
+@UASLocalMetadataSet.add_parser
+class TargetWidth(MappedElementParser):
+    """MISB 0601 Tag 22: Target Width Conversion."""
+    key = b'\x16'
+    _domain = (0, 2**16-1)
+    _range = (0, +10e3)
+    units = 'meters'
+
+
+@UASLocalMetadataSet.add_parser
+class FrameCenterLatitude(MappedElementParser):
+    """MISB 0601 Tag 23: Frame Center Latitude Conversion."""
+    key = b'\x17'
+    _domain = (-(2**31-1), 2**31-1)
+    _range = (-90, 90)
+    units = 'degrees'
+
+
+@UASLocalMetadataSet.add_parser
+class FrameCenterLongitude(MappedElementParser):
+    """MISB 0601 Tag 24: Frame Center Longitude Conversion."""
+    key = b'\x18'
+    _domain = (-(2**31-1), 2**31-1)
+    _range = (-180, 180)
+    units = 'degrees'
+
+
+@UASLocalMetadataSet.add_parser
+class FrameCenterElevation(MappedElementParser):
+    """MISB 0601 Tag 25: Frame Center Elevation Conversion."""
+    key = b'\x19'
+    _domain = (0, 2**16)
+    _range = (-900, +19e3)
+    units = 'meters'
+
 # @ST0601.add_parser
 # class OffsetCornerLatitudePoint1(MappedElementParser):
 #     tag, name = 26, "Offset Corner Latitude Point 1"
