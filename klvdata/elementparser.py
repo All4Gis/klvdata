@@ -26,6 +26,7 @@ from abc import ABCMeta
 from abc import abstractmethod
 from klvdata.element import Element
 from klvdata.common import bytes_to_datetime
+from klvdata.common import bytes_to_int
 from klvdata.common import bytes_to_float
 from klvdata.common import bytes_to_hexstr
 from klvdata.common import bytes_to_str
@@ -72,6 +73,21 @@ class BaseValue(metaclass=ABCMeta):
     def __str__(self):
         """Required by element.Element"""
         pass
+
+class IntElementParser(ElementParser, metaclass=ABCMeta):
+    def __init__(self, value):
+        super().__init__(IntValue(value))
+
+
+class IntValue(BaseValue):
+    def __init__(self, value):
+        self.value = value
+
+    def __bytes__(self):
+        return bytes(self.value)
+
+    def __str__(self):
+        return str(bytes_to_int(self.value))
 
 
 class BytesElementParser(ElementParser, metaclass=ABCMeta):

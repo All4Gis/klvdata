@@ -24,6 +24,7 @@
 
 from klvdata.common import hexstr_to_bytes
 from klvdata.element import UnknownElement
+from klvdata.elementparser import IntElementParser
 from klvdata.elementparser import BytesElementParser
 from klvdata.elementparser import DateTimeElementParser
 from klvdata.elementparser import MappedElementParser
@@ -342,3 +343,10 @@ class FrameCenterElevation(MappedElementParser):
 # # Tags 43 - 46 "Target Information"
 #
 # # Tag 47 "Generic Flag"
+
+@UASLocalMetadataSet.add_parser
+class UASDatalinkLSVersion(IntElementParser):
+    """MISB 0601 Tag 65: UAS Datalink LS Version Number Conversion."""
+    key = b'\x41'
+    _domain = (0, 2**8-1)
+    _range = (0, 255)
