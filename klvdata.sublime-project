@@ -1,12 +1,14 @@
 {
+	"settings": {
+		"test_command": "python -m unittest discover --start-directory tests/",
+	},
 	"build_systems":
 	[
 		{
 			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"name": "Anaconda Python Builder",
 			"selector": "source.python",
-			"working_dir": "$project_path",
-			"shell_cmd": "\"python\" -u \"$file\""
+			"shell_cmd": "\"python\" -u \"$file\"",
 		}
 	],
 	"folders":
