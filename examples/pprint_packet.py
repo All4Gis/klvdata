@@ -100,7 +100,7 @@ def element_value(item):
 
 
 def element_full(item):
-    if len(item) > 1:
+    if len(item.key) > 1:
         key = klvdata.common.bytes_to_hexstr(item.key)
     else:
         key = klvdata.common.bytes_to_int(item.key)
