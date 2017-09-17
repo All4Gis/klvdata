@@ -23,9 +23,21 @@
 # SOFTWARE.
 
 from klvdata.element import UnknownElement
+from klvdata.elementparser import EnumElementParser
+from klvdata.elementparser import IntElementParser
 from klvdata.elementparser import BytesElementParser
+from klvdata.elementparser import StringElementParser
 from klvdata.misb0601 import UASLocalMetadataSet
 from klvdata.setparser import SetParser
+
+_security_classification = {
+    b'\x01': 'UNCLASSIFIED',
+    b'\x02': 'RESTRICTED',
+    b'\x03': 'CONFIDENTIAL',
+    b'\x04': 'SECRET',
+    b'\x05': 'TOP SECRET',
+}
+
 
 _classifying_country_coding = {
     b'\x01': 'ISO-3166 Two Letter',
@@ -88,7 +100,7 @@ class SecurityLocalMetadataSet(SetParser):
 
 
 @SecurityLocalMetadataSet.add_parser
-class SecurityClassification(BytesElementParser):
+class SecurityClassification(EnumElementParser):
     """MISB ST0102 Security Classification value interpretation parser.
 
     The Security Classification metadata element contains a value
@@ -97,10 +109,43 @@ class SecurityClassification(BytesElementParser):
     """
     key = b'\x01'
 
-    _classification = {
-        b'\x01': 'UNCLASSIFIED',
-        b'\x02': 'RESTRICTED',
-        b'\x03': 'CONFIDENTIAL',
-        b'\x04': 'SECRET',
-        b'\x05': 'TOP SECRET',
-    }
+    _allowed_values = _security_classification
+
+
+@SecurityLocalMetadataSet.add_parser
+class CountryCodingMethod(EnumElementParser):
+    """MISB ST0102 Classifying Country and Releasing Instructions Country
+    Coding Method.
+    """
+    key = b'\x02'
+
+    _allowed_values = _classifying_country_coding
+
+@SecurityLocalMetadataSet.add_parser
+class ClassifyingCountry(StringElementParser):
+    """MISB ST0102 Classifying Country"""
+
+    # @TODO: This item is not implmented using defined encoding method.
+    key = b'\x03'
+
+@SecurityLocalMetadataSet.add_parser
+class ObjectCountryCodingMethod(EnumElementParser):
+    """MISB ST0102 Object Country Coding Method.
+    """
+    key = b'\x0C'
+
+    _allowed_values = _object_country_coding
+
+@SecurityLocalMetadataSet.add_parser
+class ObjectCountryCodes(StringElementParser):
+    """MISB ST0102 Object Country Codse."""
+
+    # @TODO: This item is not implmented using defined encoding method.
+    key = b'\x0D'
+
+@SecurityLocalMetadataSet.add_parser
+class SecurityMetadataVersion(IntElementParser):
+    """MISB 0601 Tag 65: Security LS Version Number Conversion."""
+    key = b'\x16'
+    _domain = (0, 2**8-1)
+    _range = (0, 255)

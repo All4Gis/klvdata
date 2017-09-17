@@ -74,6 +74,30 @@ class BaseValue(metaclass=ABCMeta):
         """Required by element.Element"""
         pass
 
+class EnumElementParser(ElementParser, metaclass=ABCMeta):
+    def __init__(self, value):
+        super().__init__(EnumValue(value, self._allowed_values))
+
+
+    @property
+    @classmethod
+    @abstractmethod
+    def _allowed_values(cls):
+        pass
+
+
+class EnumValue(BaseValue):
+    def __init__(self, value, _allowed_values):
+        self.value = value
+        self._allowed_values = _allowed_values
+
+    def __bytes__(self):
+        return bytes(self.value)
+
+    def __str__(self):
+        return str(self._allowed_values[self.value])
+
+
 class IntElementParser(ElementParser, metaclass=ABCMeta):
     def __init__(self, value):
         super().__init__(IntValue(value))
@@ -103,7 +127,7 @@ class BytesValue(BaseValue):
         return bytes(self.value)
 
     def __str__(self):
-        return bytes_to_hexstr(self.value, start='0x', sep='')
+        return bytes_to_hexstr(self.value, start='', sep=' ')
 
 
 class DateTimeElementParser(ElementParser, metaclass=ABCMeta):
