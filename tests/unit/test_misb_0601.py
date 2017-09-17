@@ -29,7 +29,7 @@ from klvdata.common import hexstr_to_bytes
 class ParserSingleShort(unittest.TestCase):
     def test_checksum(self):
         # See MISB ST0902.5
-        interpretation = "0xAA43"
+        interpretation = "AA 43"
         tlv_hex_bytes = hexstr_to_bytes("01 02 AA 43")
         value = tlv_hex_bytes[2:]
 
@@ -99,7 +99,7 @@ class ParserSingleShort(unittest.TestCase):
         self.assertAlmostEqual(float(PlatformHeadingAngle(value).value), 159.974, 3)
 
     def test_PlatformPitchAngle(self):
-        # See MISB ST0601.9
+        """Test MISB ST0601 Tag 6 - Platform Pitch Angle Conversion."""
         # @TODO: Limit display precision and add units as per example.
         interpretation = "-0.4315317239905987"
         tlv_hex_bytes = hexstr_to_bytes("06 02 FD 3D")
@@ -110,7 +110,30 @@ class ParserSingleShort(unittest.TestCase):
         self.assertEqual(bytes(PlatformPitchAngle(value)), tlv_hex_bytes)
         self.assertAlmostEqual(float(PlatformPitchAngle(value).value), -0.4315, 4)
 
+    def test_PlatformRollAngle(self):
+        """Test MISB ST0601 Tag 7 - Platform Roll Angle Conversion."""
 
+        interpretation = "3.4058656575212893"
+        tlv_hex_bytes = hexstr_to_bytes("07 02 08 B8")
+        value = tlv_hex_bytes[2:]
+
+        from klvdata.misb0601 import PlatformRollAngle
+        self.assertEqual(str(PlatformRollAngle(value).value), interpretation)
+        self.assertEqual(bytes(PlatformRollAngle(value)), tlv_hex_bytes)
+        self.assertAlmostEqual(float(PlatformRollAngle(value).value), 3.406, 3)
+
+    def test_SensorTrueAltitude(self):
+        """Test MISB ST0601 Tag 15: Sensor True Altitude Conversion"""
+
+        interpretation = "14190.719462882427"
+        # Test data pulled from MISB ST0902.6 Annex C
+        tlv_hex_bytes = hexstr_to_bytes("0F 02 C2 21")
+        value = tlv_hex_bytes[2:]
+
+        from klvdata.misb0601 import SensorTrueAltitude
+        self.assertEqual(str(SensorTrueAltitude(value).value), interpretation)
+        self.assertEqual(bytes(SensorTrueAltitude(value)), tlv_hex_bytes)
+        self.assertAlmostEqual(float(SensorTrueAltitude(value).value), 14190.7, 1)
 
 if __name__ == '__main__':
     unittest.main()

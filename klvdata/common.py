@@ -107,7 +107,7 @@ def bytes_to_float(value, _domain, _range):
     y1, y2 = _range
     m = (y2 - y1) / (x2 - x1)
 
-    x = bytes_to_int(value, signed=any((i < 0 for i in _range)))
+    x = bytes_to_int(value, signed=any((i < 0 for i in _domain)))
 
     # Return y given x
     return m * (x - x1) + y1
@@ -121,7 +121,7 @@ def float_to_bytes(value, _domain, _range):
     y = value
 
     length = int((x2 - x1 - 1).bit_length() / 8)
-    signed = any((i < 0 for i in _range))
+    signed = any((i < 0 for i in _domain))
     x = round((1 / m) * (y - y1) + x1)
 
     # Return x given y
