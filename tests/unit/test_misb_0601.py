@@ -223,7 +223,6 @@ class ParserSingleShort(unittest.TestCase):
         self.assertEqual(bytes(SensorHorizontalFieldOfView(value)), tlv_hex_bytes)
         self.assertAlmostEqual(float(SensorHorizontalFieldOfView(value).value), 144.571, 3)
 
-
     def test_SensorVerticalFieldOfView(self):
         """MISB ST0601 Tag 17: Sensor Vertical Field of View Conversion."""
 
@@ -236,7 +235,6 @@ class ParserSingleShort(unittest.TestCase):
         self.assertEqual(str(SensorVerticalFieldOfView(value).value), interpretation)
         self.assertEqual(bytes(SensorVerticalFieldOfView(value)), tlv_hex_bytes)
         self.assertAlmostEqual(float(SensorVerticalFieldOfView(value).value), 152.644, 3)
-
 
     def test_SensorRelativeAzimuthAngle(self):
         """MISB 0601 Tag 18: Sensor Relative Azimuth Ange Conversion."""
@@ -252,7 +250,6 @@ class ParserSingleShort(unittest.TestCase):
         self.assertEqual(bytes(SensorRelativeAzimuthAngle(value)), tlv_hex_bytes)
         self.assertAlmostEqual(float(SensorRelativeAzimuthAngle(value).value), 160.71921144, 8)
 
-
     # def test_SensorRelativeElevationAngle(self):
     #     """MISB 0601 Tag 19: Sensor Relative Elevation Angle Conversion."""
 
@@ -266,7 +263,6 @@ class ParserSingleShort(unittest.TestCase):
     #     self.assertEqual(bytes(SensorRelativeAzimuthAngle(value)), tlv_hex_bytes)
     #     self.assertAlmostEqual(float(SensorRelativeAzimuthAngle(value).value), -168.79232483, 8)
 
-
     def test_SensorRelativeRollAngle(self):
         """MISB 0601 Tag 20: Sensor Relative Roll Angle Conversion."""
 
@@ -278,7 +274,6 @@ class ParserSingleShort(unittest.TestCase):
         self.assertEqual(str(SensorRelativeRollAngle(value).value), interpretation)
         self.assertEqual(bytes(SensorRelativeRollAngle(value)), tlv_hex_bytes)
         self.assertAlmostEqual(float(SensorRelativeRollAngle(value).value), 176.86543765, 8)
-
 
     def test_SlantRange(self):
         """MISB 0601 Tag 21: Slant Range Conversion."""
@@ -292,7 +287,6 @@ class ParserSingleShort(unittest.TestCase):
         self.assertEqual(bytes(SlantRange(value)), tlv_hex_bytes)
         self.assertAlmostEqual(float(SlantRange(value).value), 68590.983, 3)
 
-
     def test_TargetWidth(self):
         """MISB 0601 Tag 22: Target Width Conversion."""
 
@@ -304,7 +298,6 @@ class ParserSingleShort(unittest.TestCase):
         self.assertEqual(str(TargetWidth(value).value), interpretation)
         self.assertEqual(bytes(TargetWidth(value)), tlv_hex_bytes)
         self.assertAlmostEqual(float(TargetWidth(value).value), 722.8, 1)
-
 
     def test_FrameCenterLatitude(self):
         """MISB 0601 Tag 23: Frame Center Latitude Conversion."""
@@ -318,7 +311,6 @@ class ParserSingleShort(unittest.TestCase):
         self.assertEqual(bytes(FrameCenterLatitude(value)), tlv_hex_bytes)
         self.assertAlmostEqual(float(FrameCenterLatitude(value).value), -10.54238863, 8)
 
-
     def test_FrameCenterLongitude(self):
         """MISB 0601 Tag 24: Frame Center Longitude Conversion."""
 
@@ -330,7 +322,6 @@ class ParserSingleShort(unittest.TestCase):
         self.assertEqual(str(FrameCenterLongitude(value).value), interpretation)
         self.assertEqual(bytes(FrameCenterLongitude(value)), tlv_hex_bytes)
         self.assertAlmostEqual(float(FrameCenterLongitude(value).value), 29.15789012, 8)
-
 
     def test_FrameCenterElevation(self):
         """MISB 0601 Tag 25: Frame Center Elevation Conversion."""
