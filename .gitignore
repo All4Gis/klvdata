@@ -61,8 +61,8 @@ instance/
 .scrapy
 
 # VirtualEnv stuff:
-.Python 
-[Bb]in 
+.Python
+[Bb]in
 [Ii]nclude
 [Ll]ib
 [Ll]ib64
@@ -110,3 +110,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Sublimetext3
+*.sublime-workspace
