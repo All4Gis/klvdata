@@ -165,16 +165,16 @@ class SensorLongitude(MappedElementParser):
 
 @UASLocalMetadataSet.add_parser
 class SensorTrueAltitude(MappedElementParser):
-    """MISB 0601 Tag 15: Sensor True Altitue Conversion."""
+    """MISB ST0601 Tag 15: Sensor True Altitue Conversion."""
     key = b'\x0F'
-    _domain = (0, 2**16)
+    _domain = (0, 2**16-1)
     _range = (-900, +19e3)
     units = 'meters'
 
 
 @UASLocalMetadataSet.add_parser
 class SensorHorizontalFieldOfView(MappedElementParser):
-    """MISB 0601 Tag 16: Sensor Horizontal Field of View Conversion."""
+    """MISB ST0601 Tag 16: Sensor Horizontal Field of View Conversion."""
     key = b'\x10'
     _domain = (0, 2**16-1)
     _range = (0, 180)
@@ -183,7 +183,7 @@ class SensorHorizontalFieldOfView(MappedElementParser):
 
 @UASLocalMetadataSet.add_parser
 class SensorVerticalFieldOfView(MappedElementParser):
-    """MISB 0601 Tag 17: Sensor Vertical Field of View Conversion."""
+    """MISB ST0601 Tag 17: Sensor Vertical Field of View Conversion."""
     key = b'\x11'
     _domain = (0, 2**16-1)
     _range = (0, 180)
@@ -344,9 +344,25 @@ class FrameCenterElevation(MappedElementParser):
 #
 # # Tag 47 "Generic Flag"
 
+
 @UASLocalMetadataSet.add_parser
 class UASDatalinkLSVersion(IntElementParser):
     """MISB 0601 Tag 65: UAS Datalink LS Version Number Conversion."""
     key = b'\x41'
+    _domain = (0, 2**8-1)
+    _range = (0, 255)
+
+
+@UASLocalMetadataSet.add_parser
+class MIISCoreIdentifier(BytesElementParser):
+    """MISB 0601 Tag 94: MIIS Core Identifier.
+
+    Local set tag to include the ST1204 MIIS Core identifier binary value
+    within ST0601. Use according to the rules and requirements defined in `MISB
+    ST` 1204.
+
+    .. _MISB ST: http://www.gwg.nga.mil/misb/st_pubs.html
+    """
+    key = b'\x5E'
     _domain = (0, 2**8-1)
     _range = (0, 255)
