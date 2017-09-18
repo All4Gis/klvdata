@@ -32,19 +32,12 @@ from klvdata.elementparser import StringElementParser
 from klvdata.setparser import SetParser
 from klvdata.streamparser import StreamParser
 
-INT8 = (0, 255)
-UINT8 = (0, (2**8 - 1))
-INT16 = (-(2**15 - 1), (2**15 - 1))
-UINT16 = (0, (2**16 - 1))
-INT32 = (-(2**31 - 1), (2**31 - 1))
-UINT32 = (0, (2**32 - 1))
-
-# INT8 = (-127, +127)
-# UINT8 = (0, +255)
-# INT16 = (-32_768, +32_767)
-# UINT16 = (0, +65_535)
-# INT32 = (-2_147_483_647, +2_147_483_647)
-# UINT32 = (0, +2_147_483_647)
+INT8 = (-127, +127)
+UINT8 = (0, +255)
+INT16 = (-32_767, +32_767)
+UINT16 = (0, +65_535)
+INT32 = (-2_147_483_647, +2_147_483_647)
+UINT32 = (0, +4_294_967_295)
 
 class UnknownElement(UnknownElement):
     pass
