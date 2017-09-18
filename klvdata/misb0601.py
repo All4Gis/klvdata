@@ -58,7 +58,9 @@ class UASLocalMetadataSet(SetParser):
 
 @UASLocalMetadataSet.add_parser
 class Checksum(BytesElementParser):
-    """Checksum used to detect errors within a UAV Local Set packet.
+    """MISB 0601 Tag 1: Checksum Conversion.
+
+    Checksum used to detect errors within a UAV Local Set packet.
 
     Checksum formed as lower 16-bits of summation performed on entire
     LS packet, including 16-byte US key and 1-byte checksum length.
@@ -70,7 +72,7 @@ class Checksum(BytesElementParser):
 
 @UASLocalMetadataSet.add_parser
 class PrecisionTimeStamp(DateTimeElementParser):
-    """Precision Timestamp represented in microseconds.
+    """MISB 0601 Tag 2: Precision Timestamp Conversion.
 
     Precision Timestamp represented in the number of microseconds elapsed
     since midnight (00:00:00), January 1, 1970 not including leap seconds.
@@ -82,7 +84,7 @@ class PrecisionTimeStamp(DateTimeElementParser):
 
 @UASLocalMetadataSet.add_parser
 class MissionID(StringElementParser):
-    """Mission ID is the descriptive mission identifier.
+    """MISB 0601 Tag 3: Mission ID Conversion
 
     Mission ID value field free text with maximum of 127 characters
     describing the event.
@@ -92,11 +94,15 @@ class MissionID(StringElementParser):
 
 @UASLocalMetadataSet.add_parser
 class PlatformTailNumber(StringElementParser):
+    """MISB 0601 Tag 4: Platform Tail Number Conversion."""
+
     key = b'\x04'
 
 
 @UASLocalMetadataSet.add_parser
 class PlatformHeadingAngle(MappedElementParser):
+    """MISB 0601 Tag 5: Platform Heading Angle Conversion."""
+
     key = b'\x05'
     _domain = UINT16
     _range = (0, 360)
@@ -105,6 +111,8 @@ class PlatformHeadingAngle(MappedElementParser):
 
 @UASLocalMetadataSet.add_parser
 class PlatformPitchAngle(MappedElementParser):
+    """MISB 0601 Tag 6: Platform Pitch Angle Conversion."""
+
     key = b'\x06'
     _domain = INT16
     _range = (-20, 20)
@@ -113,6 +121,8 @@ class PlatformPitchAngle(MappedElementParser):
 
 @UASLocalMetadataSet.add_parser
 class PlatformRollAngle(MappedElementParser):
+    """MISB 0601 Tag 7: Platform Roll Angle Conversion."""
+
     key = b'\x07'
     _domain = INT16
     _range = (-50, 50)
@@ -121,6 +131,8 @@ class PlatformRollAngle(MappedElementParser):
 
 @UASLocalMetadataSet.add_parser
 class PlatformTrueAirspeed(MappedElementParser):
+    """MISB 0601 Tag 8: Platform True Airspeed Conversion."""
+
     key = b'\x08'
     _domain = UINT8
     _range = (0, 255)
@@ -129,6 +141,8 @@ class PlatformTrueAirspeed(MappedElementParser):
 
 @UASLocalMetadataSet.add_parser
 class PlatformIndicatedAirspeed(MappedElementParser):
+    """MISB 0601 Tag 9: Platform Indicated Airspeed Conversion."""
+
     key = b'\x09'
     _domain = UINT8
     _range = (0, 255)
@@ -137,21 +151,29 @@ class PlatformIndicatedAirspeed(MappedElementParser):
 
 @UASLocalMetadataSet.add_parser
 class PlatformDesignation(StringElementParser):
+    """MISB 0601 Tag 10: Platform Designation Conversion."""
+
     key = b'\x0A'
 
 
 @UASLocalMetadataSet.add_parser
 class ImageSourceSensor(StringElementParser):
+    """MISB 0601 Tag 11: Image Source Sensor Conversion."""
+
     key = b'\x0B'
 
 
 @UASLocalMetadataSet.add_parser
 class ImageCoordinateSystem(StringElementParser):
+    """MISB 0601 Tag 12: Image Coordinate System Conversion."""
+
     key = b'\x0C'
 
 
 @UASLocalMetadataSet.add_parser
 class SensorLatitude(MappedElementParser):
+    """MISB 0601 Tag 13: Sensor Latitude Conversion."""
+
     key = b'\x0D'
     _domain = INT32
     _range = (-90, 90)
@@ -160,6 +182,8 @@ class SensorLatitude(MappedElementParser):
 
 @UASLocalMetadataSet.add_parser
 class SensorLongitude(MappedElementParser):
+    """MISB 0601 Tag 14: Sensor Longitude Conversion."""
+
     key = b'\x0E'
     _domain = INT32
     _range = (-180, 180)
@@ -266,6 +290,8 @@ class FrameCenterElevation(MappedElementParser):
 
 # @ST0601.add_parser
 # class OffsetCornerLatitudePoint1(MappedElementParser):
+#    """MISB 0601 Tag 26: Offset Corner Latitude Point 1 Conversion."""
+#
 #     tag, name = 26, "Offset Corner Latitude Point 1"
 #     min_value, max_value, units = -0.075, +0.075, 'degrees'
 #     min_length, max_length, signed = 2, 2, True
@@ -273,6 +299,8 @@ class FrameCenterElevation(MappedElementParser):
 #
 # @ST0601.add_parser
 # class OffsetCornerLongitudePoint1(MappedElementParser):
+#    """MISB 0601 Tag 27: Offset Corner Longitude Point 1 Conversion."""
+#
 #     tag, name = 27, "Offset Corner Longitude Point 1"
 #     min_value, max_value, units = -0.075, +0.075, 'degrees'
 #     min_length, max_length, signed = 2, 2, True
@@ -280,6 +308,8 @@ class FrameCenterElevation(MappedElementParser):
 #
 # @ST0601.add_parser
 # class OffsetCornerLatitudePoint2(MappedElementParser):
+#    """MISB 0601 Tag 28: Offset Corner Latitude Point 2 Conversion."""
+#
 #     tag, name = 28, "Offset Corner Latitude Point 2"
 #     min_value, max_value, units = -0.075, +0.075, 'degrees'
 #     min_length, max_length, signed = 2, 2, True
@@ -287,6 +317,8 @@ class FrameCenterElevation(MappedElementParser):
 #
 # @ST0601.add_parser
 # class OffsetCornerLongitudePoint2(MappedElementParser):
+#    """MISB 0601 Tag 29: Offset Corner Longitude Point 2 Conversion."""
+#
 #     tag, name = 29, "Offset Corner Longitude Point 2"
 #     min_value, max_value, units = -0.075, +0.075, 'degrees'
 #     min_length, max_length, signed = 2, 2, True
@@ -294,6 +326,8 @@ class FrameCenterElevation(MappedElementParser):
 #
 # @ST0601.add_parser
 # class OffsetCornerLatitudePoint3(MappedElementParser):
+#    """MISB 0601 Tag 30: Offset Corner Latitude Point 3 Conversion."""
+#
 #     tag, name = 30, "Offset Corner Latitude Point 3"
 #     min_value, max_value, units = -0.075, +0.075, 'degrees'
 #     min_length, max_length, signed = 2, 2, True
@@ -301,6 +335,8 @@ class FrameCenterElevation(MappedElementParser):
 #
 # @ST0601.add_parser
 # class OffsetCornerLongitudePoint3(MappedElementParser):
+#    """MISB 0601 Tag 31: Offset Corner Longitude Point 3 Conversion."""
+#
 #     tag, name = 31, "Offset Corner Longitude Point 3"
 #     min_value, max_value, units = -0.075, +0.075, 'degrees'
 #     min_length, max_length, signed = 2, 2, True
@@ -308,6 +344,8 @@ class FrameCenterElevation(MappedElementParser):
 #
 # @ST0601.add_parser
 # class OffsetCornerLatitudePoint4(MappedElementParser):
+#    """MISB 0601 Tag 32: Offset Corner Latitude Point 4 Conversion."""
+#
 #     tag, name = 32, "Offset Corner Latitude Point 4"
 #     min_value, max_value, units = -0.075, +0.075, 'degrees'
 #     min_length, max_length, signed = 2, 2, True
@@ -315,6 +353,8 @@ class FrameCenterElevation(MappedElementParser):
 #
 # @ST0601.add_parser
 # class OffsetCornerLongitudePoint4(MappedElementParser):
+#    """MISB 0601 Tag 33: Offset Corner Longitude Point 4 Conversion."""
+#
 #     tag, name = 33, "Offset Corner Longitude Point 4"
 #     min_value, max_value, units = -0.075, +0.075, 'degrees'
 #     min_length, max_length, signed = 2, 2, True
@@ -324,6 +364,8 @@ class FrameCenterElevation(MappedElementParser):
 #
 # @ST0601.add_parser
 # class TargetLocationLatitude(MappedElementParser):
+#    """MISB 0601 Tag 40: Target Location Latitude Conversion."""
+#
 #     tag, name = 40, "Target Location latitude"
 #     min_value, max_value, units = -90, +90, 'degrees'
 #     min_length, max_length, signed = 4, 4, True
@@ -331,6 +373,8 @@ class FrameCenterElevation(MappedElementParser):
 #
 # @ST0601.add_parser
 # class TargetLocationLongitude(MappedElementParser):
+#    """MISB 0601 Tag 41: Target Location Longitude Conversion."""
+#
 #     tag, name = 41, "Target Location Longitude"
 #     min_value, max_value, units = -180, +180, 'degrees'
 #     min_length, max_length, signed = 4, 4, True
@@ -338,6 +382,8 @@ class FrameCenterElevation(MappedElementParser):
 #
 # @ST0601.add_parser
 # class TargetLocationElevation(MappedElementParser):
+#    """MISB 0601 Tag 42: Target Location Elevation Conversion."""
+#
 #     tag, name = 42, "Target Location Elevation"
 #     min_value, max_value, units = -900, +19e3, "meters"
 #     min_length, max_length, signed = 2, 2, False
