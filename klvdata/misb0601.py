@@ -39,6 +39,7 @@ UINT16 = (0, +65_535)
 INT32 = (-2_147_483_647, +2_147_483_647)
 UINT32 = (0, +4_294_967_295)
 
+
 class UnknownElement(UnknownElement):
     pass
 
@@ -53,7 +54,6 @@ class UASLocalMetadataSet(SetParser):
     parsers = {}
 
     _unknown_element = UnknownElement
-
 
 
 @UASLocalMetadataSet.add_parser
@@ -138,19 +138,16 @@ class PlatformIndicatedAirspeed(MappedElementParser):
 @UASLocalMetadataSet.add_parser
 class PlatformDesignation(StringElementParser):
     key = b'\x0A'
-    # min_length, max_length = 0, 127
 
 
 @UASLocalMetadataSet.add_parser
 class ImageSourceSensor(StringElementParser):
     key = b'\x0B'
-    # min_length, max_length = 0, 127
 
 
 @UASLocalMetadataSet.add_parser
 class ImageCoordinateSystem(StringElementParser):
     key = b'\x0C'
-    # min_length, max_length = 0, 127
 
 
 @UASLocalMetadataSet.add_parser
