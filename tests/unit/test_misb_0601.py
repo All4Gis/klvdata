@@ -250,18 +250,18 @@ class ParserSingleShort(unittest.TestCase):
         self.assertEqual(bytes(SensorRelativeAzimuthAngle(value)), tlv_hex_bytes)
         self.assertAlmostEqual(float(SensorRelativeAzimuthAngle(value).value), 160.71921144, 8)
 
-    # def test_SensorRelativeElevationAngle(self):
-    #     """MISB 0601 Tag 19: Sensor Relative Elevation Angle Conversion."""
+    def test_SensorRelativeElevationAngle(self):
+        """MISB 0601 Tag 19: Sensor Relative Elevation Angle Conversion."""
 
-    #     interpretation = "-168.79232483"
-    #     # Test data pulled from MISB ST0902.6 Annex C
-    #     tlv_hex_bytes = hexstr_to_bytes("13 04 87 F8 4B 86")
-    #     value = tlv_hex_bytes[2:]
+        interpretation = "-168.79232483394085"
+        # Test data pulled from MISB ST0902.6 Annex C
+        tlv_hex_bytes = hexstr_to_bytes("13 04 87 F8 4B 86")
+        value = tlv_hex_bytes[2:]
 
-    #     from klvdata.misb0601 import SensorRelativeAzimuthAngle
-    #     self.assertEqual(str(SensorRelativeAzimuthAngle(value).value), interpretation)
-    #     self.assertEqual(bytes(SensorRelativeAzimuthAngle(value)), tlv_hex_bytes)
-    #     self.assertAlmostEqual(float(SensorRelativeAzimuthAngle(value).value), -168.79232483, 8)
+        from klvdata.misb0601 import SensorRelativeElevationAngle
+        self.assertEqual(str(SensorRelativeElevationAngle(value).value), interpretation)
+        self.assertEqual(bytes(SensorRelativeElevationAngle(value)), tlv_hex_bytes)
+        self.assertAlmostEqual(float(SensorRelativeElevationAngle(value).value), -168.79232483, 8)
 
     def test_SensorRelativeRollAngle(self):
         """MISB 0601 Tag 20: Sensor Relative Roll Angle Conversion."""
