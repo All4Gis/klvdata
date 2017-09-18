@@ -32,6 +32,19 @@ from klvdata.elementparser import StringElementParser
 from klvdata.setparser import SetParser
 from klvdata.streamparser import StreamParser
 
+INT8 = (0, 255)
+UINT8 = (0, (2**8 - 1))
+INT16 = (-(2**15 - 1), (2**15 - 1))
+UINT16 = (0, (2**16 - 1))
+INT32 = (-(2**31 - 1), (2**31 - 1))
+UINT32 = (0, (2**32 - 1))
+
+# INT8 = (-127, +127)
+# UINT8 = (0, +255)
+# INT16 = (-32_768, +32_767)
+# UINT16 = (0, +65_535)
+# INT32 = (-2_147_483_647, +2_147_483_647)
+# UINT32 = (0, +2_147_483_647)
 
 class UnknownElement(UnknownElement):
     pass
@@ -92,7 +105,7 @@ class PlatformTailNumber(StringElementParser):
 @UASLocalMetadataSet.add_parser
 class PlatformHeadingAngle(MappedElementParser):
     key = b'\x05'
-    _domain = (0, 2**16-1)
+    _domain = UINT16
     _range = (0, 360)
     units = 'degrees'
 
@@ -100,7 +113,7 @@ class PlatformHeadingAngle(MappedElementParser):
 @UASLocalMetadataSet.add_parser
 class PlatformPitchAngle(MappedElementParser):
     key = b'\x06'
-    _domain = (-(2**15-1), 2**15-1)
+    _domain = INT16
     _range = (-20, 20)
     units = 'degrees'
 
@@ -108,7 +121,7 @@ class PlatformPitchAngle(MappedElementParser):
 @UASLocalMetadataSet.add_parser
 class PlatformRollAngle(MappedElementParser):
     key = b'\x07'
-    _domain = (-(2**15-1), 2**15-1)
+    _domain = INT16
     _range = (-50, 50)
     units = 'degrees'
 
@@ -116,7 +129,7 @@ class PlatformRollAngle(MappedElementParser):
 @UASLocalMetadataSet.add_parser
 class PlatformTrueAirspeed(MappedElementParser):
     key = b'\x08'
-    _domain = (0, 2**8-1)
+    _domain = UINT8
     _range = (0, 255)
     # units = 'meters/second'
 
@@ -124,7 +137,7 @@ class PlatformTrueAirspeed(MappedElementParser):
 @UASLocalMetadataSet.add_parser
 class PlatformIndicatedAirspeed(MappedElementParser):
     key = b'\x09'
-    _domain = (0, 2**8-1)
+    _domain = UINT8
     _range = (0, 255)
     # units = 'meters/second'
 
@@ -150,7 +163,7 @@ class ImageCoordinateSystem(StringElementParser):
 @UASLocalMetadataSet.add_parser
 class SensorLatitude(MappedElementParser):
     key = b'\x0D'
-    _domain = (-(2**31-1), 2**31-1)
+    _domain = INT32
     _range = (-90, 90)
     units = 'degrees'
 
@@ -158,7 +171,7 @@ class SensorLatitude(MappedElementParser):
 @UASLocalMetadataSet.add_parser
 class SensorLongitude(MappedElementParser):
     key = b'\x0E'
-    _domain = (-(2**31-1), 2**31-1)
+    _domain = INT32
     _range = (-180, 180)
     units = 'degrees'
 
@@ -167,7 +180,7 @@ class SensorLongitude(MappedElementParser):
 class SensorTrueAltitude(MappedElementParser):
     """MISB ST0601 Tag 15: Sensor True Altitue Conversion."""
     key = b'\x0F'
-    _domain = (0, 2**16-1)
+    _domain = UINT16
     _range = (-900, +19e3)
     units = 'meters'
 
@@ -176,7 +189,7 @@ class SensorTrueAltitude(MappedElementParser):
 class SensorHorizontalFieldOfView(MappedElementParser):
     """MISB ST0601 Tag 16: Sensor Horizontal Field of View Conversion."""
     key = b'\x10'
-    _domain = (0, 2**16-1)
+    _domain = UINT16
     _range = (0, 180)
     units = 'degrees'
 
@@ -185,7 +198,7 @@ class SensorHorizontalFieldOfView(MappedElementParser):
 class SensorVerticalFieldOfView(MappedElementParser):
     """MISB ST0601 Tag 17: Sensor Vertical Field of View Conversion."""
     key = b'\x11'
-    _domain = (0, 2**16-1)
+    _domain = UINT16
     _range = (0, 180)
     units = 'degrees'
 
@@ -194,7 +207,7 @@ class SensorVerticalFieldOfView(MappedElementParser):
 class SensorRelativeAzimuthAngle(MappedElementParser):
     """MISB 0601 Tag 18: Sensor Relative Azimuth Ange Conversion."""
     key = b'\x12'
-    _domain = (0, 2**32-1)
+    _domain = UINT32
     _range = (0, 360)
     units = 'degrees'
 
@@ -203,7 +216,7 @@ class SensorRelativeAzimuthAngle(MappedElementParser):
 class SensorRelativeElevationAngle(MappedElementParser):
     """MISB 0601 Tag 19: Sensor Relative Elevation Angle Conversion."""
     key = b'\x13'
-    _domain = (-(2**31-1), 2**31-1)
+    _domain = INT32
     _range = (-180, 180)
     units = 'degrees'
 
@@ -212,7 +225,7 @@ class SensorRelativeElevationAngle(MappedElementParser):
 class SensorRelativeRollAngle(MappedElementParser):
     """MISB 0601 Tag 20: Sensor Relative Roll Angle Conversion."""
     key = b'\x14'
-    _domain = (0, 2**32-1)
+    _domain = UINT32
     _range = (0, 360)
     units = 'degrees'
 
@@ -221,7 +234,7 @@ class SensorRelativeRollAngle(MappedElementParser):
 class SlantRange(MappedElementParser):
     """MISB 0601 Tag 21: Slant Range Conversion."""
     key = b'\x15'
-    _domain = (0, 2**32-1)
+    _domain = UINT32
     _range = (0, +5e6)
     units = 'meters'
 
@@ -230,7 +243,7 @@ class SlantRange(MappedElementParser):
 class TargetWidth(MappedElementParser):
     """MISB 0601 Tag 22: Target Width Conversion."""
     key = b'\x16'
-    _domain = (0, 2**16-1)
+    _domain = UINT16
     _range = (0, +10e3)
     units = 'meters'
 
@@ -239,7 +252,7 @@ class TargetWidth(MappedElementParser):
 class FrameCenterLatitude(MappedElementParser):
     """MISB 0601 Tag 23: Frame Center Latitude Conversion."""
     key = b'\x17'
-    _domain = (-(2**31-1), 2**31-1)
+    _domain = INT32
     _range = (-90, 90)
     units = 'degrees'
 
@@ -248,7 +261,7 @@ class FrameCenterLatitude(MappedElementParser):
 class FrameCenterLongitude(MappedElementParser):
     """MISB 0601 Tag 24: Frame Center Longitude Conversion."""
     key = b'\x18'
-    _domain = (-(2**31-1), 2**31-1)
+    _domain = INT32
     _range = (-180, 180)
     units = 'degrees'
 
@@ -257,7 +270,7 @@ class FrameCenterLongitude(MappedElementParser):
 class FrameCenterElevation(MappedElementParser):
     """MISB 0601 Tag 25: Frame Center Elevation Conversion."""
     key = b'\x19'
-    _domain = (0, 2**16)
+    _domain = UINT16
     _range = (-900, +19e3)
     units = 'meters'
 
@@ -349,8 +362,6 @@ class FrameCenterElevation(MappedElementParser):
 class UASDatalinkLSVersion(IntElementParser):
     """MISB 0601 Tag 65: UAS Datalink LS Version Number Conversion."""
     key = b'\x41'
-    _domain = (0, 2**8-1)
-    _range = (0, 255)
 
 
 @UASLocalMetadataSet.add_parser
@@ -364,5 +375,3 @@ class MIISCoreIdentifier(BytesElementParser):
     .. _MISB ST: http://www.gwg.nga.mil/misb/st_pubs.html
     """
     key = b'\x5E'
-    _domain = (0, 2**8-1)
-    _range = (0, 255)
