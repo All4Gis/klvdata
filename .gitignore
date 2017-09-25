@@ -113,3 +113,7 @@ ENV/
 
 # Sublimetext3
 *.sublime-workspace
+
+# PyCharm
+.idea/*
+
