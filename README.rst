@@ -41,7 +41,7 @@ Try these commands in your GNU/Linux terminal.
 
 First:
 
-Video samples_ and more_
+Video `samples`_ and `more`_
 .. _Video samples: http://samples.ffmpeg.org/MPEG2/mpegts-klv/
 .. _more: https://drive.google.com/drive/folders/1-B2uaW7_cfYZohZYFozrgBhIaztI1MSP
 
@@ -58,7 +58,7 @@ Video samples_ and more_
     for packet in klvdata.StreamParser(sys.stdin.buffer.read()): packet.structure()
     EOF
 
-Note : For extract Data Stream From MPEG-TS File at Line Speed and Save to Binary File: 
+Note for extract Data Stream From MPEG-TS File at Line Speed and Save to Binary File: 
 
 .. code-block:: console
 
