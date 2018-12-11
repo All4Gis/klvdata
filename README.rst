@@ -30,7 +30,7 @@ Features
 - Parses KLV metadata streams.
 - Supports `MISB ST`_ 0601 UAS Datalink Local Set.
 - Supports `MISB ST`_ 0102 Security Metadata Local Set.
-- Built for Python 3.5, 3.6.
+- Built for Python 3.5, 3.6 , 3.7
 - Requires no external Python dependencies.
 
 .. _MISB ST: http://www.gwg.nga.mil/misb/st_pubs.html
@@ -40,6 +40,11 @@ Quick Start
 Try these commands in your GNU/Linux terminal.
 
 First:
+
+Video samples_ and more_
+.. _Video samples: http://samples.ffmpeg.org/MPEG2/mpegts-klv/
+.. _more: https://drive.google.com/drive/folders/1-B2uaW7_cfYZohZYFozrgBhIaztI1MSP
+
 
 .. code-block:: console
 
@@ -53,6 +58,15 @@ First:
     for packet in klvdata.StreamParser(sys.stdin.buffer.read()): packet.structure()
     EOF
 
+Note : For extract Data Stream From MPEG-TS File at Line Speed and Save to Binary File: 
+
+.. code-block:: console
+
+	ffmpeg -i <MPEGTS_infile> -map data-re -codec copy -f data <binary_outfile>
+
+stackoverflow.com_
+
+.. _stackoverflow.com: https://stackoverflow.com/a/29461404/4699904
 
 And then:
 
