@@ -36,11 +36,6 @@ from klvdata.common import (bytes_to_datetime,
                                      str_to_bytes)
 from klvdata.element import Element
 
-try:
-    from pydevd import *
-except ImportError:
-    None
-
 
 class ElementParser(Element):
     """Construct a Element Parser base class.

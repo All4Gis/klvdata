@@ -31,10 +31,6 @@ from klvdata.elementparser import (BytesElementParser,
                                             StringElementParser)
 from klvdata.setparser import SetParser
 from klvdata.streamparser import StreamParser
-try:
-    from pydevd import *
-except ImportError:
-    None
 
 
 class UnknownElement(UnknownElement):

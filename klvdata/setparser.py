@@ -31,11 +31,6 @@ from pprint import pformat
 from klvdata.element import Element
 from klvdata.klvparser import KLVParser
 
-try:
-    from pydevd import *
-except ImportError:
-    None
-
 
 class SetParser(Element):
     """Parsable Element. Not intended to be used directly. Always as super class."""

@@ -26,11 +26,6 @@
 from klvdata.element import UnknownElement
 from klvdata.klvparser import KLVParser
 
-try:
-    from pydevd import *
-except ImportError:
-    None
-
 
 class StreamParser:
     parsers = {}

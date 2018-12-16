@@ -27,10 +27,6 @@ from io import BytesIO
 from io import IOBase
 
 from klvdata.common import bytes_to_int
-try:
-    from pydevd import *
-except ImportError:
-    None
 
 
 class KLVParser(object):
