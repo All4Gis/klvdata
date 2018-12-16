@@ -41,7 +41,7 @@ Try these commands in your GNU/Linux terminal.
 
 First:
 
-Video `samples`_ and `more`_
+`Video samples`_ and `more`_
 
 
 .. _Video samples: http://samples.ffmpeg.org/MPEG2/mpegts-klv/
